@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
   constructor(public dataService: DataService) { }
 
   async ngOnInit() {
-    this.characters = await this.dataService.getCharacters()
+    this.characters = await this.dataService.characters
   }
 
 

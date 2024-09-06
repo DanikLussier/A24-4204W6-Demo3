@@ -12,10 +12,6 @@ export class DataService {
 
   constructor(public http: HttpClient) { }
 
-  async getCharacters(): Promise<string[]> {
-    return this.characters
-  }
-
   async getHttpCharacter(nom: String): Promise<Character> {
     let x = await lastValueFrom(this.http.get<any>("https://spapi.dev/api/characters?search=" + nom))
     return new Character(x.data[0].name, x.data[0].age, x.data[0].occupation, x.data[0].grade, x.data[0].episodes.length)
