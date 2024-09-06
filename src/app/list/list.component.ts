@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { CardComponent } from '../card/card.component';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-list',
@@ -11,12 +12,12 @@ import { CardComponent } from '../card/card.component';
 })
 export class ListComponent implements OnInit {
 
-  // Cette liste a été transférée dans le DataService
-  characters: string[] = ["bebe", "butters", "clyde", "craig", "eric", "kenny", "kyle", "nichole", "stan", "tolkien", "wendy"];
+  characters: string[] = []
 
-  constructor() { }
+  constructor(public dataService: DataService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.characters = await this.dataService.getCharacters()
   }
 
 

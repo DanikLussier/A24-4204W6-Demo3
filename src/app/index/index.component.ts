@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-index',
@@ -11,15 +12,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './index.component.css'
 })
 export class IndexComponent {
-  
-  // Cette liste a été transférée dans le DataService
-  characters : string[] = ["bebe","butters","clyde","craig","eric","kenny","kyle","nichole","stan","tolkien","wendy"];
-  
-  characterName : string = "";
 
-  constructor() { }
+  characterName: string = "";
+  characters: string[] = []
 
-  ngOnInit() {
+  constructor(public dataService: DataService) { }
+
+  async ngOnInit() {
+    this.characters = await this.dataService.getCharacters()
   }
 
 }
